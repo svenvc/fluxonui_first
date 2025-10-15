@@ -10,33 +10,42 @@ defmodule FluxonUIFirstWeb.TodoLive.Index do
       <.header>
         Listing Todos
         <:actions>
-          <.button variant="primary" navigate={~p"/todos/new"}>
+          <.button variant="solid" navigate={~p"/todos/new"}>
             <.icon name="hero-plus" /> New Todo
           </.button>
         </:actions>
       </.header>
 
-      <.table
-        id="todos"
-        rows={@streams.todos}
-        row_click={fn {_id, todo} -> JS.navigate(~p"/todos/#{todo}") end}
-      >
-        <:col :let={{_id, todo}} label="Description">{todo.description}</:col>
-        <:col :let={{_id, todo}} label="Due">{todo.due}</:col>
-        <:action :let={{_id, todo}}>
-          <div class="sr-only">
-            <.link navigate={~p"/todos/#{todo}"}>Show</.link>
-          </div>
-          <.link navigate={~p"/todos/#{todo}/edit"}>Edit</.link>
-        </:action>
-        <:action :let={{id, todo}}>
-          <.link
-            phx-click={JS.push("delete", value: %{id: todo.id}) |> hide("##{id}")}
-            data-confirm="Are you sure?"
+      <.table id="todos">
+        <.table_head>
+          <:col>Description</:col>
+          <:col>Due</:col>
+          <:col>Actions</:col>
+        </.table_head>
+        <.table_body>
+          <.table_row
+            :for={{id, todo} <- @streams.todos}
+            id={"##{id}"}
+            phx-click={JS.navigate(~p"/todos/#{todo}")}
+            class="cursor-pointer hover:bg-accent/50"
           >
-            Delete
-          </.link>
-        </:action>
+            <:cell>{todo.description}</:cell>
+            <:cell>{todo.due}</:cell>
+            <:cell>
+              <div class="sr-only">
+                <.link navigate={~p"/todos/#{todo}"}>Show</.link> |
+              </div>
+              <.link navigate={~p"/todos/#{todo}/edit"}>Edit</.link>
+              |
+              <.link
+                phx-click={JS.push("delete", value: %{id: todo.id}) |> hide("##{id}")}
+                data-confirm="Are you sure?"
+              >
+                Delete
+              </.link>
+            </:cell>
+          </.table_row>
+        </.table_body>
       </.table>
     </Layouts.app>
     """

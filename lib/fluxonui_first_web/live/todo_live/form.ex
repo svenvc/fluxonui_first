@@ -14,12 +14,14 @@ defmodule FluxonUIFirstWeb.TodoLive.Form do
       </.header>
 
       <.form for={@form} id="todo-form" phx-change="validate" phx-submit="save">
-        <.input field={@form[:description]} type="text" label="Description" />
-        <.input field={@form[:due]} type="date" label="Due" />
-        <footer>
-          <.button phx-disable-with="Saving..." variant="primary">Save Todo</.button>
-          <.button navigate={return_path(@current_scope, @return_to, @todo)}>Cancel</.button>
-        </footer>
+        <div class="space-y-6">
+          <.input field={@form[:description]} type="text" label="Description" />
+          <.date_picker field={@form[:due]} label="Due" min={Date.utc_today()} />
+          <footer>
+            <.button phx-disable-with="Saving..." variant="solid">Save Todo</.button>
+            <.button navigate={return_path(@current_scope, @return_to, @todo)}>Cancel</.button>
+          </footer>
+        </div>
       </.form>
     </Layouts.app>
     """
@@ -46,7 +48,10 @@ defmodule FluxonUIFirstWeb.TodoLive.Form do
   end
 
   defp apply_action(socket, :new, _params) do
-    todo = %Todo{user_id: socket.assigns.current_scope.user.id}
+    todo = %Todo{
+      user_id: socket.assigns.current_scope.user.id,
+      due: Date.utc_today()
+    }
 
     socket
     |> assign(:page_title, "New Todo")
