@@ -5,6 +5,8 @@
 @source "../css";
 @source "../js";
 @source "../../lib/fluxonui_first_web";
+@source "../../deps/fluxon/**/*.*ex";
+@import "../../deps/fluxon/priv/static/theme";
 
 /* A Tailwind plugin that makes "hero-#{ICON}" classes available.
    The heroicons installation itself is managed by your mix.exs */
@@ -103,3 +105,11 @@
 [data-phx-session], [data-phx-teleported-src] { display: contents }
 
 /* This file is for your main application CSS */
+
+[data-theme='light'] {
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+}
