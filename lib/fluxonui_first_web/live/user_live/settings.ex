@@ -17,14 +17,16 @@ defmodule FluxonUIFirstWeb.UserLive.Settings do
       </div>
 
       <.form for={@email_form} id="email_form" phx-submit="update_email" phx-change="validate_email">
-        <.input
-          field={@email_form[:email]}
-          type="email"
-          label="Email"
-          autocomplete="username"
-          required
-        />
-        <.button variant="primary" phx-disable-with="Changing...">Change Email</.button>
+        <div class="space-y-6">
+          <.input
+            field={@email_form[:email]}
+            type="email"
+            label="Email"
+            autocomplete="username"
+            required
+          />
+          <.button variant="solid" phx-disable-with="Changing...">Change Email</.button>
+        </div>
       </.form>
 
       <div class="divider" />
@@ -45,22 +47,24 @@ defmodule FluxonUIFirstWeb.UserLive.Settings do
           autocomplete="username"
           value={@current_email}
         />
-        <.input
-          field={@password_form[:password]}
-          type="password"
-          label="New password"
-          autocomplete="new-password"
-          required
-        />
-        <.input
-          field={@password_form[:password_confirmation]}
-          type="password"
-          label="Confirm new password"
-          autocomplete="new-password"
-        />
-        <.button variant="primary" phx-disable-with="Saving...">
-          Save Password
-        </.button>
+        <div class="space-y-6">
+          <.input
+            field={@password_form[:password]}
+            type="password"
+            label="New password"
+            autocomplete="new-password"
+            required
+          />
+          <.input
+            field={@password_form[:password_confirmation]}
+            type="password"
+            label="Confirm new password"
+            autocomplete="new-password"
+          />
+          <.button variant="solid" phx-disable-with="Saving...">
+            Save Password
+          </.button>
+        </div>
       </.form>
     </Layouts.app>
     """
