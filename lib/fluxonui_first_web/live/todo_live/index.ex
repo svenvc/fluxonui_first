@@ -25,7 +25,7 @@ defmodule FluxonUIFirstWeb.TodoLive.Index do
         <.table_body>
           <.table_row
             :for={{id, todo} <- @streams.todos}
-            id={"##{id}"}
+            id={"#{id}"}
             phx-click={JS.navigate(~p"/todos/#{todo}")}
             class="cursor-pointer hover:bg-accent/50"
           >

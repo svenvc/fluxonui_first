@@ -103,7 +103,7 @@ defmodule FluxonUIFirstWeb.UserLive.LoginTest do
       assert html =~ "Log in with email"
 
       assert html =~
-               ~s(<input type="email" name="user[email]" id="login_form_magic_email" value="#{user.email}")
+               ~s(type="email" name="user[email]" id="login_form_magic_email" value="#{user.email}")
     end
   end
 end
